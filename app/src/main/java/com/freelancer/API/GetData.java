@@ -1,5 +1,8 @@
 package com.freelancer.API;
 
+import com.freelancer.Proje;
+import com.freelancer.ProjeSayfasi;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,9 +16,19 @@ public interface GetData {
     @GET("/api/users/")
     Call<List<User>> getUsers();
 
+    @GET("/api/projects/")
+    Call<List<Proje>> getProjects();
+
     @POST("/api/users")
-    Call<User> register(@Body User user);
+    Call<User> NewUser(@Body User user);
+
+    @POST("/api/projects")
+    Call<Proje> NewProject(@Body Proje proje);
 
     @PUT("api/users/{id}/")
-    Call<User> update(@Path("id") int id, @Body User user);
+    Call<User> UpdateUser(@Path("id") int id, @Body User user);
+
+    @PUT("api/projects/{id}/")
+    Call<ProjeSayfasi> UpdateProject(@Path("id") int id, @Body Proje proje);
+
 }

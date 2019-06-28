@@ -1,7 +1,11 @@
 package com.freelancer;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,8 @@ import retrofit2.Response;
 public class Anasayfa extends AppCompatActivity {
     TextView tv;
     GetData getData;
+    Button newProject;
+    String eMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +32,64 @@ public class Anasayfa extends AppCompatActivity {
 
         tv = findViewById(R.id.TextView);
         getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
+        newProject=findViewById(R.id.Button_NewProject);
+        eMail=new Intent().getStringExtra("eMail");
+        tv.setText("Merhaba " + eMail);
 
+        /*
+        Call<List<User>> call = getData.getUsers();
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                for (int i=0;i<response.body().size();i++){
+                    tv.setText(tv.getText()+"\n User: "+response.body().get(i).getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable throwable) {
+                Toast.makeText(Anasayfa.this, "Unable to load users", Toast.LENGTH_SHORT).show();
+            }
+        });
+        */
+
+        Call<List<Proje>> call2 = getData.getProjects();
+        call2.enqueue(new Callback<List<Proje>>() {
+            @Override
+            public void onResponse(Call<List<Proje>> call, Response<List<Proje>> response) {
+                for (int i=0;i<response.body().size();i++){
+                    tv.setText(tv.getText()+"\nProje: "+response.body().get(i).getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Proje>> call, Throwable throwable) {
+                Toast.makeText(Anasayfa.this, "Unable to load users", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        newProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Proje p=new Proje("YeniProje","Yeni Projeeeeeeeeee",0,0,0);
+                Call<Proje> call=getData.NewProject(p);
+                call.enqueue(new Callback<Proje>() {
+                    @Override
+                    public void onResponse(Call<Proje> call, Response<Proje> response) {
+                        Toast.makeText(Anasayfa.this, "New project has created succesfully!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Proje> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        });
+
+        /*
         Call<List<User>> call = getData.getUsers();
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -39,33 +102,19 @@ public class Anasayfa extends AppCompatActivity {
                 Toast.makeText(Anasayfa.this, "Unable to load users", Toast.LENGTH_SHORT).show();
             }
         });
-        /*
-        RetroUsers user = new RetroUsers("deneme","deneme@deneme.com","1234",12345678);
-        Call<RetroUsers> call1 = getData.register(user);
-        call1.enqueue(new Callback<RetroUsers>() {
-            @Override
-            public void onResponse(Call<RetroUsers> call, Response<RetroUsers> response) {
-                RetroUsers loginResponse = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<RetroUsers> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "onFailure called ", Toast.LENGTH_SHORT).show();
-                call.cancel();
-            }
-        });
         */
+
         /*
-        RetroUsers user2 = new RetroUsers(2,"update","update@update.com","1234",12345678);
-        Call<RetroUsers> call2 = getData.update(2,user2);
-        call2.enqueue(new Callback<RetroUsers>() {
+        User user2 = new User(2,"","","",0);
+        Call<User> call2 = getData.UpdateUser(2,user2);
+        call2.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<RetroUsers> call, Response<RetroUsers> response) {
-                RetroUsers loginResponse = response.body();
+            public void onResponse(Call<User> call, Response<User> response) {
+                User loginResponse = response.body();
             }
 
             @Override
-            public void onFailure(Call<RetroUsers> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "onFailure called ", Toast.LENGTH_SHORT).show();
                 call.cancel();
             }
@@ -73,9 +122,4 @@ public class Anasayfa extends AppCompatActivity {
         */
     }
 
-    private void loadDataList(List<User> usersList) {
-        for (int i=0;i<usersList.size();i++){
-            tv.setText(tv.getText()+"\n"+usersList.get(i).getName());
-        }
-    }
 }
