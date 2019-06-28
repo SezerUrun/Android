@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        email="sezer_urun@outlook.com";
-        sifre="1234";
+        email="a";
+        sifre="b";
         EditText_Email=findViewById(R.id.EditText_Email);
         EditText_Sifre=findViewById(R.id.EditText_Sifre);
         Button_Giris=findViewById(R.id.Button_Giris);
