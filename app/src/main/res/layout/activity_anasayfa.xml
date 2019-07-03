@@ -4,53 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Anasayfa"
+    tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="#222">
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Anasayfa"
-        android:textColor="@color/beyaz"
-        android:textSize="32dp"
-        android:layout_margin="10dp"/>
+    android:id="@+id/LinearLayout"
+    android:padding="10dp"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="En Yeni Projeler"
-        android:textSize="16dp"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
+        android:text="EN YENİ PROJELER"
+        android:textColor="#48f"
+        android:background="@color/siyah"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
-    <TextView
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="________________________________"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Button_NewProject"
-        android:text="Yeni Proje Oluştur"
-        android:background="#000"
-        android:textColor="#fff"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/TextView"
-            android:textColor="@color/beyaz"
-            android:layout_margin="10dp"/>
-    </ScrollView>
-
-
-
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
 </LinearLayout>

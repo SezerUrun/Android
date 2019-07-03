@@ -1,11 +1,13 @@
 package com.freelancer;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Proje {
 
     @SerializedName("Header")
-    private String name;
+    private String header;
     @SerializedName("Description")
     private String description;
     @SerializedName("Id")
@@ -13,29 +15,36 @@ public class Proje {
     @SerializedName("OwnerId")
     private int ownerId;
     @SerializedName("WorkerId")
-    private int workerId;
+    private @Nullable Integer workerId;
+    @SerializedName("MaxPrice")
+    private int maxPrice;
 
-    Proje(String name, String description, int id, int ownerId,int workerId){
-        this.name=name;
+    Proje(String header, String description, int id, int ownerId,int maxPrice){
+        this.header=header;
         this.description=description;
         this.id=id;
-        this.ownerId=workerId;
+        //this.workerId=workerId;
+        this.ownerId=ownerId;
+        this.maxPrice=maxPrice;
     }
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getHeader() {
+        return header;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String header) {
+        this.header = header;
     }
+
+    public void setHeader(String header) { this.header = header; }
 
     public String getDescription() {
         return description;
@@ -57,7 +66,11 @@ public class Proje {
         return workerId;
     }
 
-    public void setWorkerId(int workerId) {
+    public void setWorkerId(Integer workerId) {
         this.workerId = workerId;
     }
+
+    public int getMaxPrice() { return maxPrice; }
+
+    public void setMaxPrice(int maxPrice) { this.maxPrice = maxPrice; }
 }

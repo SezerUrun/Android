@@ -33,8 +33,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/TextView_Tekliflerim"
-        android:text="Tekliflerimı"
+        android:text="Tekliflerim"
         android:textColor="@color/beyaz"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_NewProject"
+        android:text="Yeni Proje Oluştur"
+        android:background="#000"
+        android:textColor="#fff"
         android:layout_margin="10dp"/>
 
 </LinearLayout>

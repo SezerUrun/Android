@@ -43,5 +43,22 @@
         android:text="Teklifler"
         android:textColor="@color/beyaz"
         android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_MaxPrice"
+        android:text="Max Ücret"
+        android:textColor="@color/beyaz"
+        android:layout_margin="10dp"/>
 
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teklif Ver"
+        android:background="@color/siyah"
+        android:textColor="@color/beyaz"
+        android:id="@+id/Button_TeklifVer"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
 </LinearLayout>
