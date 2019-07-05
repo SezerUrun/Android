@@ -10,7 +10,7 @@ public class Proje {
     private String header;
     @SerializedName("Description")
     private String description;
-    @SerializedName("Id")
+    @SerializedName("ProjectId")
     private int id;
     @SerializedName("OwnerId")
     private int ownerId;

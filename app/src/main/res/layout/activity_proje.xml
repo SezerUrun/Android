@@ -39,19 +39,43 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TextView_Teklifler"
-        android:text="Teklifler"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/TextView_MaxPrice"
         android:text="Max Ücret"
         android:textColor="@color/beyaz"
         android:layout_margin="10dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_Teklifler"
+        android:text="Teklifler"
+        android:textColor="@color/beyaz"
+        android:layout_margin="10dp"/>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListView_Teklifler">
+    </ListView>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditText_TeklifMiktari"
+        android:hint="Teklif Miktarını Girin"
+        android:textColor="@color/beyaz"
+        android:textColorHint="#888"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:numeric="decimal"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditText_Aciklama"
+        android:hint="Açıklama"
+        android:textColor="@color/beyaz"
+        android:textColorHint="#888"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,5 +84,16 @@
         android:textColor="@color/beyaz"
         android:id="@+id/Button_TeklifVer"
         android:padding="10dp"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:numeric="decimal"
+        android:textColorHint="@color/beyaz"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_ProjeSahibininHesabinaGit"
+        android:text="Proje Sahibinin Hesabına Git"
+        android:background="@color/siyah"
+        android:textColor="#mavi"/>
+
 </LinearLayout>

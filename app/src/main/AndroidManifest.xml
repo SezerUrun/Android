@@ -11,12 +11,17 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProjeSayfasi"
-            android:parentActivityName=".Anasayfa"/>
-        <activity android:name=".Profil"
-            android:parentActivityName=".Anasayfa"/>
-        <activity android:name=".Anasayfa"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".MesajlasmaSayfasi"></activity>
+        <activity android:name=".UyeSayfasi" />
+        <activity
+            android:name=".ProjeSayfasi"
+            android:parentActivityName=".Anasayfa" />
+        <activity
+            android:name=".Profil"
+            android:parentActivityName=".Anasayfa" />
+        <activity
+            android:name=".Anasayfa"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

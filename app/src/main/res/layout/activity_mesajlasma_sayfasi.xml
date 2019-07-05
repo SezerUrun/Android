@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MesajlasmaSayfasi"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_Gonderici"
+        android:text="Gönderici : "
+        android:textColor="@color/beyaz"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_Alici"
+        android:text="Alici : "
+        android:textColor="@color/beyaz"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_MesajIcerigi"
+        android:textColor="@color/beyaz"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditText_Mesaj"
+        android:hint="Yanıtınızı buraya yazınız"
+        android:textColorHint="#888"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_MesajGonder"
+        android:text="Gönder"
+        android:background="@color/siyah"
+        android:textColor="@color/mavi"/>
+
+
+</LinearLayout>

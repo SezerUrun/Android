@@ -59,5 +59,12 @@
         android:textColor="#000"
         android:layout_margin="10dp"/>
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="V1.0"
+        android:layout_gravity="left"
+        android:textColor="@color/beyaz"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
 </LinearLayout>

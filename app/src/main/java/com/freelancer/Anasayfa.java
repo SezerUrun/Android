@@ -29,7 +29,6 @@ import retrofit2.Response;
 public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
     GetData getData;
     Button newProject;
-    String eMail;
     ListView listView;
     TextView tv;
     int projectId;
@@ -45,7 +44,6 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
         ly=findViewById(R.id.LinearLayout);
         getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
         newProject=findViewById(R.id.Button_NewProject);
-        eMail=new Intent().getStringExtra("eMail");
         //tv=findViewById(R.id.TextView);
         //tvs=new TextViews();
         try{
@@ -69,9 +67,9 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
                             Intent i=new Intent(Anasayfa.this,ProjeSayfasi.class);
                             i.putExtra("header",list.get(position).getHeader());
                             i.putExtra("description",list.get(position).getDescription());
-                            i.putExtra("id",list.get(position).getId());
+                            i.putExtra("projeId",list.get(position).getId());
                             i.putExtra("price",list.get(position).getMaxPrice());
-
+                            i.putExtra("ownerId",list.get(position).getOwnerId());
                             startActivity(i);
                         }
                     });
@@ -192,8 +190,9 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
             case R.id.action_profil:
                 Intent i=new Intent(Anasayfa.this, Profil.class);
                 i.putExtra("id",new Intent().getStringExtra("id"));
-                i.putExtra("email",new Intent().getStringExtra("email"));
+                i.putExtra("mailAdresi",new Intent().getStringExtra("mailAdresi"));
                 i.putExtra("kullaniciAdi",new Intent().getStringExtra("kullaniciAdi"));
+                i.putExtra("sifre",new Intent().getStringExtra("sifre"));
                 startActivity(i);
                 return true;
             default:
