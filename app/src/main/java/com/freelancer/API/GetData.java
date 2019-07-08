@@ -3,7 +3,6 @@ package com.freelancer.API;
 import com.freelancer.Message;
 import com.freelancer.Offer;
 import com.freelancer.Proje;
-import com.freelancer.ProjeSayfasi;
 import com.freelancer.User;
 
 import java.util.List;
@@ -18,13 +17,7 @@ import retrofit2.http.Query;
 
 public interface GetData {
     @GET("/api/users/")
-    Call<User> getUser();
-
-    @GET("/api/users/{mail}")
-    Call<User> getUser(@Path("mail") String mailAdresi);
-
-    @GET("/api/users/")
-    Call<User> getUser2(@Query("mail") String mailAdresi);
+    Call<User> getUser(@Query("mail") String mailAdresi);
 
     @GET("/api/users/")
     Call<List<User>> getUsers();
@@ -48,10 +41,10 @@ public interface GetData {
     Call<Proje> NewProject(@Body Proje proje);
 
     @POST("/api/offers")
-    Call<Offer> NewOffer(Offer offer);
+    Call<Offer> NewOffer(@Body Offer offer);
 
     @POST("/api/messages")
-    Call<Boolean> NewMessage(Message message);
+    Call<Boolean> NewMessage(@Body Message message);
 
     @PUT("api/users/{id}/")
     Call<User> UpdateUser(@Path("id") int id, @Body User user);
@@ -60,6 +53,6 @@ public interface GetData {
     Call<User> UpdatePassword(@Path("id") int id, @Body User user);
 
     @PUT("api/projects/{id}/")
-    Call<ProjeSayfasi> UpdateProject(@Path("id") int id, @Body Proje proje);
+    Call<Proje> UpdateProject(@Path("id") int id, @Body Proje proje);
 
 }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,15 +16,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.freelancer.API.GetData;
+import com.freelancer.API.RetrofitClient;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,9 +33,9 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
     TextView textView_KullaniciAdi,textView_mailAdresi,textView_Projelerim,textView_Bakiye;
     EditText editText_eskiSifre, editText_yeniSifre, editText_yeniSifreTekrar;
     ImageView imageView_ProfilResmi;
-    String mailAdresi,sifre,kullaniciAdi,projelerim;
-    int kullaniciId,bakiye;
-    Intent item;
+    String mailAdresi,kullaniciAdi,projelerim,userName,password;
+    int userId,bakiye;
+    Intent item,intent;
     ListView listView_Mesajlarim;
 
     @Override
@@ -44,6 +43,7 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+        getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
         textView_KullaniciAdi=findViewById(R.id.TextView_KullanıcıAdi);
         textView_mailAdresi=findViewById(R.id.TextView_MailAdresi);
         textView_Projelerim=findViewById(R.id.TextView_Projelerim);
@@ -55,31 +55,29 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         editText_yeniSifreTekrar=findViewById(R.id.EditText_YeniSifreTekrar);
         imageView_ProfilResmi=findViewById(R.id.ImageView_ProfilResmi);
         listView_Mesajlarim=findViewById(R.id.ListView_Mesajlarim);
+
+        intent= getIntent();
+        mailAdresi = intent.getStringExtra("mailAdress");
+        password=intent.getStringExtra("password");
+        userId=intent.getIntExtra("userId",-1);
+        userName=intent.getStringExtra("userName");
+        projelerim=intent.getStringExtra("projelerim");
+        bakiye=intent.getIntExtra("bakiye",0);
+
+        textView_KullaniciAdi.setText(textView_KullaniciAdi.getText()+userName);
+        textView_mailAdresi.setText(textView_mailAdresi.getText()+mailAdresi);
+        textView_Projelerim.setText(textView_Projelerim.getText()+projelerim);
+        textView_Bakiye.setText(textView_Bakiye.getText()+Integer.toString(bakiye));
+
         button_sifreDegistir.setOnClickListener(this);
         button_newProject.setOnClickListener(this);
         imageView_ProfilResmi.setOnClickListener(this);
 
-        //KULLANICI BİLGİLERİNİN ÖNCEKİ ACVIVITY'DEN ALINMASI
-        try {
-            Intent i=new Intent();
-            mailAdresi = i.getStringExtra("mailAdresi");
-            sifre=i.getStringExtra("sifre");
-            kullaniciId=i.getIntExtra("kullaniciId",-1);
-            kullaniciAdi=i.getStringExtra("kullaniciAdi");
-            projelerim=i.getStringExtra("projelerim");
-            bakiye=i.getIntExtra("bakiye",0);
-            textView_KullaniciAdi.setText(textView_KullaniciAdi.getText()+Integer.toString(kullaniciId));
-            textView_mailAdresi.setText(textView_mailAdresi.getText()+mailAdresi);
-            textView_Projelerim.setText(textView_Projelerim.getText()+projelerim);
-            textView_Bakiye.setText(textView_Bakiye.getText()+Integer.toString(bakiye));
-        }
-        catch(Exception e){
-            Toast.makeText(this, "Kullanici bilgileri alınamadı", Toast.LENGTH_SHORT).show();
-        }
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //GELEN MESAJLARIN LİSTELENMESİ
         try{
-            Call<List<Message>> call = getData.getMessages(kullaniciId);
+            Call<List<Message>> call = getData.getMessages(userId);
             call.enqueue(new Callback<List<Message>>() {
                 @Override
                 public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
@@ -89,7 +87,7 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
                         projeler[i]=list.get(i).getContent();
                     }
                     ListView listView= findViewById(R.id.listView);
-                    ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Profil.this, R.layout.satir_layout, R.id.textView, projeler);
+                    ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Profil.this, R.layout.proje_layout, R.id.textView, projeler);
                     listView.setAdapter(veriAdaptoru);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -127,9 +125,9 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         switch (item.getItemId()) {
             case R.id.action_profil:
                 Intent i=new Intent(Profil.this, Profil.class);
-                i.putExtra("id",new Intent().getStringExtra("id"));
-                i.putExtra("mailAdresi",new Intent().getStringExtra("mailAdresi"));
-                i.putExtra("kullaniciAdi",new Intent().getStringExtra("kullaniciAdi"));
+                i.putExtra("userId",new Intent().getStringExtra("userId"));
+                i.putExtra("mailAdress",new Intent().getStringExtra("mailAdress"));
+                i.putExtra("userName",new Intent().getStringExtra("userName"));
                 startActivity(i);
                 return true;
             default:
@@ -144,8 +142,8 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
             if (editText_eskiSifre.getText().equals(new Intent().getStringArrayExtra("sifre"))){
                 if(editText_yeniSifre.getText().length()>7){
                     if (editText_yeniSifre.getText().equals(editText_yeniSifreTekrar.getText())){
-                        User user =new User(kullaniciId,kullaniciAdi,mailAdresi,sifre,bakiye);
-                        Call<User> call = getData.UpdateUser(kullaniciId,user);
+                        User user =new User(userId,kullaniciAdi,mailAdresi,password,bakiye);
+                        Call<User> call = getData.UpdateUser(userId,user);
                         call.enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {
@@ -172,7 +170,7 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         }
         else if (viewId==button_newProject.getId()){
             try{
-                Proje p=new Proje("YeniProje","Yeni Projeeeeeeeeee",0,177,100);
+                Proje p=new Proje("YeniProje","Yeni Projeeeeeeeeee",0,userId,-1,100);
                 Call<Proje> call=getData.NewProject(p);
                 call.enqueue(new Callback<Proje>() {
                     @Override
@@ -215,5 +213,15 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(Profil.this,Anasayfa.class);
+        intent.putExtra("mailAdress",mailAdresi);
+        intent.putExtra("userId",userId);
+        intent.putExtra("userName",userName);
+        intent.putExtra("password",password);
+        super.onBackPressed();
     }
 }

@@ -31,9 +31,11 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
     Button newProject;
     ListView listView;
     TextView tv;
-    int projectId;
+    int projectId, userId;
+    String mailAdresi, userName,password,header,description;
     LinearLayout ly;
     List<Proje> list;
+    Intent intent,intent2;
     //TextViews tvs;
 
     @Override
@@ -44,35 +46,67 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
         ly=findViewById(R.id.LinearLayout);
         getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
         newProject=findViewById(R.id.Button_NewProject);
+        intent=new Intent(Anasayfa.this,ProjeSayfasi.class);
+        intent2 = getIntent();
+        userId=intent2.getIntExtra("userId",-1);
+        mailAdresi=intent2.getStringExtra("mailAdress");
+        userName=intent2.getStringExtra("userName");
+        password=intent2.getStringExtra("password");
+        header=intent2.getStringExtra("header");
+        description=intent2.getStringExtra("description");
         //tv=findViewById(R.id.TextView);
         //tvs=new TextViews();
+
+        /*
+        final String[] projeler =new String[10];
+        for (int i=0;i<10;i++){
+            projeler[i]="DenemeProje"+i;
+        }
+        ListView listView= findViewById(R.id.listView);
+        ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Anasayfa.this, R.layout.proje_layout, R.id.textView, projeler);
+        listView.setAdapter(veriAdaptoru);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i=new Intent(Anasayfa.this,ProjeSayfasi.class);
+                i.putExtra("userId",new Intent().getIntExtra("userId",500));
+                i.putExtra("header","DenemeHeader"+position);
+                i.putExtra("description","DenemeDescription"+position);
+                i.putExtra("projeId",position);
+                i.putExtra("price",position*10);
+                i.putExtra("ownerId",position*100);
+                startActivity(i);
+            }
+        });
+        */
+
         try{
             Call<List<Proje>> call = getData.getProjects();
             call.enqueue(new Callback<List<Proje>>() {
                 @Override
                 public void onResponse(Call<List<Proje>> call, Response<List<Proje>> response) {
-
                     list=response.body();
                     final String[] projeler =new String[list.size()];
                     for (int i=0;i<list.size();i++){
                         projeler[i]=list.get(i).getHeader();
                     }
-
                     ListView listView= findViewById(R.id.listView);
-                    ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Anasayfa.this, R.layout.satir_layout, R.id.textView, projeler);
+                    ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Anasayfa.this, R.layout.proje_layout, R.id.textView, projeler);
                     listView.setAdapter(veriAdaptoru);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent i=new Intent(Anasayfa.this,ProjeSayfasi.class);
-                            i.putExtra("header",list.get(position).getHeader());
-                            i.putExtra("description",list.get(position).getDescription());
-                            i.putExtra("projeId",list.get(position).getId());
-                            i.putExtra("price",list.get(position).getMaxPrice());
-                            i.putExtra("ownerId",list.get(position).getOwnerId());
-                            startActivity(i);
+                            intent.putExtra("userId",userId);
+                            intent.putExtra("userName",mailAdresi);
+                            intent.putExtra("header",list.get(position).getHeader());
+                            intent.putExtra("description",list.get(position).getDescription());
+                            intent.putExtra("projeId",list.get(position).getId());
+                            intent.putExtra("price",list.get(position).getMaxPrice());
+                            intent.putExtra("ownerId",list.get(position).getOwnerId());
+                            startActivity(intent);
                         }
                     });
+
 
                     /*for (int i=0;i<size;i++){
                         //tv.setText(tv.getText()+"\n"+list.get(i).getHeader()+" "+ list.get(i).getId());
@@ -188,12 +222,12 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_profil:
-                Intent i=new Intent(Anasayfa.this, Profil.class);
-                i.putExtra("id",new Intent().getStringExtra("id"));
-                i.putExtra("mailAdresi",new Intent().getStringExtra("mailAdresi"));
-                i.putExtra("kullaniciAdi",new Intent().getStringExtra("kullaniciAdi"));
-                i.putExtra("sifre",new Intent().getStringExtra("sifre"));
-                startActivity(i);
+                Intent intent=new Intent(Anasayfa.this, Profil.class);
+                intent.putExtra("userId",userId);
+                intent.putExtra("mailAdress",mailAdresi);
+                intent.putExtra("userName",userName);
+                intent.putExtra("password",password);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -203,10 +237,10 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         Intent i=new Intent(Anasayfa.this,ProjeSayfasi.class);
-        i.putExtra("header","header");
-        i.putExtra("description","description");
+        i.putExtra("projectId",projectId);
+        i.putExtra("header",header);
+        i.putExtra("description",description);
         i.putExtra("state","-");
-        i.putExtra("id","id");
         startActivity(i);
     }
 }

@@ -19,11 +19,11 @@ public class Proje {
     @SerializedName("MaxPrice")
     private int maxPrice;
 
-    Proje(String header, String description, int id, int ownerId,int maxPrice){
+    Proje(String header, String description, int id, int ownerId,int workerId,int maxPrice){
         this.header=header;
         this.description=description;
         this.id=id;
-        //this.workerId=workerId;
+        this.workerId=workerId;
         this.ownerId=ownerId;
         this.maxPrice=maxPrice;
     }

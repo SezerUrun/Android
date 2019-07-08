@@ -1,99 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProjeSayfasi"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ProjeSayfasi"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_ProjeAdi"
-        android:text="Proje Adı"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_ProjeIDsi"
-        android:text="ID"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_ProjeAciklamasi"
-        android:text="Açıklama"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_ProjeDurumu"
-        android:text="Durumu"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_MaxPrice"
-        android:text="Max Ücret"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ProjeAdi"
+            android:text="Proje Adı"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ProjeIDsi"
+            android:text="ID"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ProjeAciklamasi"
+            android:text="Açıklama"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ProjeDurumu"
+            android:text="Durumu"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_MaxPrice"
+            android:text="Max Ücret"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_Teklifler"
-        android:text="Teklifler"
-        android:textColor="@color/beyaz"
-        android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_Teklifler"
+            android:text="Teklifler"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListView_Teklifler">
-    </ListView>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/EditText_TeklifMiktari"
-        android:hint="Teklif Miktarını Girin"
-        android:textColor="@color/beyaz"
-        android:textColorHint="#888"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:numeric="decimal"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/EditText_Aciklama"
-        android:hint="Açıklama"
-        android:textColor="@color/beyaz"
-        android:textColorHint="#888"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Teklif Ver"
-        android:background="@color/siyah"
-        android:textColor="@color/beyaz"
-        android:id="@+id/Button_TeklifVer"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:numeric="decimal"
-        android:textColorHint="@color/beyaz"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ListView_Teklifler"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Button_ProjeSahibininHesabinaGit"
-        android:text="Proje Sahibinin Hesabına Git"
-        android:background="@color/siyah"
-        android:textColor="#mavi"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ProjectOwner"
+            android:textColor="@color/mavi"
+            android:layout_margin="10dp"
+            android:padding="10dp"/>
 
-</LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EditText_TeklifMiktari"
+            android:hint="Teklif Miktarını Girin"
+            android:textColor="@color/beyaz"
+            android:textColorHint="#888"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:numeric="decimal"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EditText_Aciklama"
+            android:hint="Açıklama"
+            android:textColor="@color/beyaz"
+            android:textColorHint="#888"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teklif Ver"
+            android:background="@color/siyah"
+            android:textColor="@color/beyaz"
+            android:id="@+id/Button_TeklifVer"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:numeric="decimal"
+            android:textColorHint="@color/beyaz"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_ProjeSahibininHesabinaGit"
+            android:text="Proje Sahibinin Hesabına Git"
+            android:background="@color/siyah"
+            android:textColor="@color/mavi"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+</ScrollView>

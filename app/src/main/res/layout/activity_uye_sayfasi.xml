@@ -31,7 +31,8 @@
         android:hint="Mesajınızı Buraya Yazabilirsiniz"
         android:textColorHint="#888"
         android:padding="10dp"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"/>
 
     <Button
         android:layout_width="match_parent"
