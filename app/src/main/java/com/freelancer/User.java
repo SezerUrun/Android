@@ -60,4 +60,7 @@ public class User {
         this.id = id;
     }
 
+    public int getCredit() { return credit; }
+
+    public void setCredit(int credit) { this.credit = credit; }
 }

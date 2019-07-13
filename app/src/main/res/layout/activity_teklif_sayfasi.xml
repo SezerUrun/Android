@@ -4,52 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MesajlasmaSayfasi"
+    tools:context=".TeklifSayfasi"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TextView_Alici"
-        android:text=""
+        android:id="@+id/TextView_OfferOwnerId"
+        android:text="Teklif Sahibi Id : "
         android:textColor="@color/beyaz"
         android:padding="10dp"
         android:layout_margin="10dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TextView_Gonderici"
-        android:text=""
+        android:id="@+id/TextView_OfferPrice"
+        android:text="Teklif Miktarı : "
         android:textColor="@color/beyaz"
         android:padding="10dp"
         android:layout_margin="10dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TextView_MesajIcerigi"
-        android:text="Mesaj İçeriği : "
+        android:id="@+id/TextView_OfferDescription"
+        android:text="Teklif Açıklaması : "
         android:textColor="@color/beyaz"
         android:padding="10dp"
-        android:layout_margin="10dp" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/EditText_Mesaj"
-        android:hint="Mesajınızı buraya yazınız"
-        android:textColorHint="#888"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textColor="@color/beyaz"/>
+        android:layout_margin="10dp"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Button_MesajGonder"
-        android:text="Gönder"
-        android:background="@color/beyaz"
-        android:textColor="@color/mavi"
+        android:id="@+id/Button_AcceptTheOffer"
+        android:text="Teklifi Kabul Et"
+        android:background="@color/yesil"
+        android:textColor="@color/beyaz"
         android:padding="10dp"
         android:layout_margin="10dp"/>
-
-
 </LinearLayout>

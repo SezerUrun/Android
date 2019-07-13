@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -10,41 +11,52 @@
         android:layout_height="match_parent"
         tools:context=".ProjeSayfasi"
         android:orientation="vertical"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:id="@+id/layout">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/TextView_ProjeAdi"
-            android:text="Proje Adı"
-            android:textColor="@color/beyaz"
-            android:layout_margin="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/TextView_ProjeIDsi"
-            android:text="ID"
+            android:text="Proje Adı : "
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/TextView_ProjeAciklamasi"
-            android:text="Açıklama"
-            android:textColor="@color/beyaz"
-            android:layout_margin="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/TextView_ProjeDurumu"
-            android:text="Durumu"
+            android:text="Açıklama : "
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/TextView_MaxPrice"
-            android:text="Max Ücret"
+            android:text="Max Ücret : "
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ReleaseTime"
+            android:text="Yayınlanma Tarihi : "
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_DeadLine"
+            android:text="Bitiş Tarihi : "
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_ProjeIDsi"
+            android:text="Proje ID : "
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
 
@@ -52,16 +64,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/TextView_Teklifler"
-            android:text="Teklifler"
+            android:text="Teklifler : "
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ListView_Teklifler"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
+       <ListView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/ListView_Teklifler"
+           android:layout_alignParentLeft="true"
+           android:layout_alignParentTop="true"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -104,12 +116,31 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Button_ProjeSahibininHesabinaGit"
-            android:text="Proje Sahibinin Hesabına Git"
+            android:id="@+id/Button_ProjeSahibinineMesajGonder"
+            android:text="Proje Sahibine Mesaj Gönder"
             android:background="@color/siyah"
             android:textColor="@color/mavi"
             android:padding="10dp"
             android:layout_margin="10dp"/>
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_ProjeTamamlandi"
+            android:text="Proje Tamamlandı"
+            android:background="@color/mavi"
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:visibility="invisible"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_DeleteProject"
+            android:text="Projeyi Sil"
+            android:background="@color/kirmizi"
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:visibility="invisible"/>
     </LinearLayout>
 </ScrollView>

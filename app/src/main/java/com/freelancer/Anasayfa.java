@@ -26,16 +26,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
+public class Anasayfa extends AppCompatActivity{
     GetData getData;
     Button newProject;
     ListView listView;
     TextView tv;
-    int projectId, userId;
-    String mailAdresi, userName,password,header,description;
+    int projectId, userId,credit;
+    String mailAdress, userName,password,header,description;
     LinearLayout ly;
     List<Proje> list;
-    Intent intent,intent2;
+    Intent intent;
     //TextViews tvs;
 
     @Override
@@ -46,14 +46,14 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
         ly=findViewById(R.id.LinearLayout);
         getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
         newProject=findViewById(R.id.Button_NewProject);
-        intent=new Intent(Anasayfa.this,ProjeSayfasi.class);
-        intent2 = getIntent();
-        userId=intent2.getIntExtra("userId",-1);
-        mailAdresi=intent2.getStringExtra("mailAdress");
-        userName=intent2.getStringExtra("userName");
-        password=intent2.getStringExtra("password");
-        header=intent2.getStringExtra("header");
-        description=intent2.getStringExtra("description");
+        intent=getIntent();
+        userId=intent.getIntExtra("userId",-1);
+        mailAdress=intent.getStringExtra("mailAdress");
+        userName=intent.getStringExtra("userName");
+        password=intent.getStringExtra("password");
+        credit=intent.getIntExtra("credit",0);
+        header=intent.getStringExtra("header");
+        description=intent.getStringExtra("description");
         //tv=findViewById(R.id.TextView);
         //tvs=new TextViews();
 
@@ -86,26 +86,34 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
                 @Override
                 public void onResponse(Call<List<Proje>> call, Response<List<Proje>> response) {
                     list=response.body();
-                    final String[] projeler =new String[list.size()];
-                    for (int i=0;i<list.size();i++){
-                        projeler[i]=list.get(i).getHeader();
-                    }
-                    ListView listView= findViewById(R.id.listView);
-                    ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Anasayfa.this, R.layout.proje_layout, R.id.textView, projeler);
-                    listView.setAdapter(veriAdaptoru);
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            intent.putExtra("userId",userId);
-                            intent.putExtra("userName",mailAdresi);
-                            intent.putExtra("header",list.get(position).getHeader());
-                            intent.putExtra("description",list.get(position).getDescription());
-                            intent.putExtra("projeId",list.get(position).getId());
-                            intent.putExtra("price",list.get(position).getMaxPrice());
-                            intent.putExtra("ownerId",list.get(position).getOwnerId());
-                            startActivity(intent);
+                    if(list!=null){
+                        final String[] projeler =new String[list.size()];
+                        for (int i=0;i<list.size();i++){
+                            projeler[i]=list.get(i).getHeader();
                         }
-                    });
+                        ListView listView= findViewById(R.id.listView);
+                        ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Anasayfa.this, R.layout.satir_layout, R.id.textView, projeler);
+                        listView.setAdapter(veriAdaptoru);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                intent =new Intent(Anasayfa.this,ProjeSayfasi.class);
+                                intent.putExtra("userId",userId);
+                                intent.putExtra("userName",userName);
+                                intent.putExtra("mailAdress",mailAdress);
+                                intent.putExtra("password",password);
+                                intent.putExtra("credit",credit);
+                                intent.putExtra("header",list.get(position).getHeader());
+                                intent.putExtra("description",list.get(position).getDescription());
+                                intent.putExtra("projectId",list.get(position).getId());
+                                intent.putExtra("price",list.get(position).getMaxPrice());
+                                intent.putExtra("ownerId",list.get(position).getOwnerId());
+                                intent.putExtra("releaseTime",list.get(position).getReleaseTime());
+                                intent.putExtra("deadLine",list.get(position).getDeadline());
+                                startActivity(intent);
+                            }
+                        });
+                    }
 
 
                     /*for (int i=0;i<size;i++){
@@ -185,7 +193,6 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
             public void onResponse(Call<User> call, Response<User> response) {
                 User loginResponse = response.body();
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "onFailure called ", Toast.LENGTH_SHORT).show();
@@ -224,9 +231,10 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
             case R.id.action_profil:
                 Intent intent=new Intent(Anasayfa.this, Profil.class);
                 intent.putExtra("userId",userId);
-                intent.putExtra("mailAdress",mailAdresi);
+                intent.putExtra("mailAdress",mailAdress);
                 intent.putExtra("userName",userName);
                 intent.putExtra("password",password);
+                intent.putExtra("credit",credit);
                 startActivity(intent);
                 return true;
             default:
@@ -234,16 +242,9 @@ public class Anasayfa extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        Intent i=new Intent(Anasayfa.this,ProjeSayfasi.class);
-        i.putExtra("projectId",projectId);
-        i.putExtra("header",header);
-        i.putExtra("description",description);
-        i.putExtra("state","-");
-        startActivity(i);
-    }
 }
+
+
 /*
 class TextViews{
     int sira;

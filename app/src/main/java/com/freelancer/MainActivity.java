@@ -48,18 +48,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if (mailAdresi.equals(response.body().getMail()) && password.equals(response.body().getPassword())){
-                            Toast.makeText(MainActivity.this,"Giriş Başarılı",Toast.LENGTH_SHORT).show();
-                            Intent intent= new Intent(MainActivity.this,Anasayfa.class);
-                            intent.putExtra("mailAdress",response.body().getMail());
-                            intent.putExtra("userId",response.body().getId());
-                            intent.putExtra("userName",response.body().getName());
-                            intent.putExtra("password",response.body().getPassword());
-                            startActivity(intent);
+                        if (response.body()!=null){
+                            if (mailAdresi.equals(response.body().getMail()) && password.equals(response.body().getPassword())){
+                                Toast.makeText(MainActivity.this,"Giriş Başarılı",Toast.LENGTH_SHORT).show();
+                                Intent intent= new Intent(MainActivity.this,Anasayfa.class);
+                                intent.putExtra("mailAdress",response.body().getMail());
+                                intent.putExtra("userId",response.body().getId());
+                                intent.putExtra("userName",response.body().getName());
+                                intent.putExtra("password",response.body().getPassword());
+                                intent.putExtra("credit",response.body().getCredit());
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(MainActivity.this,"Kullanıcı adı veya şifre yanlış",Toast.LENGTH_SHORT).show();
+                            }
                         }
                         else{
                             Toast.makeText(MainActivity.this,"Kullanıcı adı veya şifre yanlış",Toast.LENGTH_SHORT).show();
                         }
+
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
@@ -67,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
             }
-
 
             /*
             mailAdresi="";
@@ -82,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this,"Giriş Başarılı Değil\nEmail adresi veya şifre yanlış",Toast.LENGTH_SHORT).show();
             }
             */
-
         }
         else if(id==Button_Kaydol.getId()){
             //YENİ KULLANICI OLUŞTURMA

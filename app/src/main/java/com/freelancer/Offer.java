@@ -4,13 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class Offer {
 
+    @SerializedName("Id")
+    int id;
     @SerializedName("UserId")
     int userId;
     @SerializedName("ProjectId")
     int projectId;
     @SerializedName("OfferPrice")
     int offerPrice;
-    @SerializedName("OfferDescription")
+    @SerializedName("Description")
     String offerDescription;
 
     Offer(int projectId, int userId, int offerPrice, String offerDescription){
@@ -19,6 +21,10 @@ public class Offer {
         this.offerPrice=offerPrice;
         this.offerDescription=offerDescription;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id){ this.id=id;}
 
     public int getUserId() {
         return userId;

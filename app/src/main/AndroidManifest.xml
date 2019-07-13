@@ -11,14 +11,15 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MesajlasmaSayfasi"></activity>
+        <activity android:name=".LoadCredit"></activity>
+        <activity android:name=".Projects" />
+        <activity android:name=".Messages" />
+        <activity android:name=".TeklifSayfasi" />
+        <activity android:name=".ProjeOlusturmaSayfasi" />
+        <activity android:name=".MesajlasmaSayfasi" />
         <activity android:name=".UyeSayfasi" />
-        <activity
-            android:name=".ProjeSayfasi"
-            android:parentActivityName=".Anasayfa" />
-        <activity
-            android:name=".Profil"
-            android:parentActivityName=".Anasayfa" />
+        <activity android:name=".ProjeSayfasi" />
+        <activity android:name=".Profil" />
         <activity
             android:name=".Anasayfa"
             android:parentActivityName=".MainActivity" />

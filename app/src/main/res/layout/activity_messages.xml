@@ -3,33 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:background="@color/colorPrimary">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Anasayfa"
-        android:orientation="vertical"
-        android:id="@+id/LinearLayout">
-
+        tools:context=".Messages"
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="EN YENİ PROJELER"
-            android:textColor="@color/mavi"
+            android:id="@+id/TextView_GelenMesajlar"
+            android:text="Gelen Mesajlar"
+            android:textColor="@color/beyaz"
             android:padding="10dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:gravity="center"/>
+            android:layout_margin="10dp"/>
 
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ListView_Mesajlarim"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
+        </ListView>
     </LinearLayout>
-
 </ScrollView>

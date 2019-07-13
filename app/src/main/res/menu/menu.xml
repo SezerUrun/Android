@@ -4,11 +4,6 @@
 
     <item android:id="@+id/action_profil"
         android:title="Profil"
-        android:icon="@drawable/icon"/>
-        //app:showAsAction="always"/>
-
-    <item android:id="@+id/action_ayarlar"
-        android:title="Ayarlar"
-        android:icon="@drawable/settings"/>
+        android:icon="@drawable/icon" />
         //app:showAsAction="always"/>
 </menu>

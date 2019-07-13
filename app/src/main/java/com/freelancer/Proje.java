@@ -10,7 +10,7 @@ public class Proje {
     private String header;
     @SerializedName("Description")
     private String description;
-    @SerializedName("ProjectId")
+    @SerializedName("Id")
     private int id;
     @SerializedName("OwnerId")
     private int ownerId;
@@ -18,15 +18,25 @@ public class Proje {
     private @Nullable Integer workerId;
     @SerializedName("MaxPrice")
     private int maxPrice;
+    @SerializedName("ReleaseTime")
+    String releaseTime;
+    @SerializedName("DeadlineTime")
+    String deadline;
+    @SerializedName("IsCompletedOwner")
+    Boolean IsCompletedOwner;
+    @SerializedName("IsCompletedWorker")
+    Boolean IsCompletedWorker;
 
-    Proje(String header, String description, int id, int ownerId,int workerId,int maxPrice){
+    Proje(String header, String description, int id, int ownerId,int maxPrice){
         this.header=header;
         this.description=description;
         this.id=id;
-        this.workerId=workerId;
         this.ownerId=ownerId;
         this.maxPrice=maxPrice;
+        IsCompletedOwner=false;
+        IsCompletedWorker=false;
     }
+
 
     public int getId() {
         return id;
@@ -62,15 +72,27 @@ public class Proje {
         this.ownerId = ownerId;
     }
 
-    public int getWorkerId() {
-        return workerId;
-    }
+    public int getWorkerId() { return workerId; }
 
-    public void setWorkerId(Integer workerId) {
-        this.workerId = workerId;
-    }
+    public void setWorkerId(Integer workerId) { this.workerId = workerId; }
 
     public int getMaxPrice() { return maxPrice; }
 
     public void setMaxPrice(int maxPrice) { this.maxPrice = maxPrice; }
+
+    public String getReleaseTime() { return releaseTime; }
+
+    public void setReleaseTime(String releaseTime) { this.releaseTime = releaseTime; }
+
+    public String getDeadline() { return deadline; }
+
+    public void setDeadline(String deadline) { this.deadline = deadline; }
+
+    public Boolean getCompletedOwner() { return IsCompletedOwner; }
+
+    public void setCompletedOwner(Boolean IsCompletedOwner) { this.IsCompletedOwner = IsCompletedOwner; }
+
+    public Boolean getCompletedWorker() { return IsCompletedWorker; }
+
+    public void setCompletedWorker(Boolean complateWorker) {this.IsCompletedWorker = complateWorker; }
 }

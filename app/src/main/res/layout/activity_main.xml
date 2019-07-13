@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/Button_Giris"
         android:text="Giriş"
-        android:background="#000"
-        android:textColor="#fff"
+        android:background="@color/mavi"
+        android:textColor="@color/siyah"
         android:layout_margin="10dp"/>
 
     <Button
@@ -55,8 +55,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/Button_Kaydol"
         android:text="Kaydol"
-        android:background="#fff"
-        android:textColor="#000"
+        android:background="@color/mavi"
+        android:textColor="@color/beyaz"
         android:layout_margin="10dp"/>
 
     <TextView

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoadCredit"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cost : "
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="1dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_Amount"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/beyaz"
+            android:numeric="decimal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Kart Numarası : "
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="1dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_CardNumber"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/beyaz"
+            android:numeric="decimal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Son Kullanma Tarihi : "
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="1dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_ExpirationDate"
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="3 Haneli Güvenlik Numarası : "
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="1dp"
+            android:numeric="decimal"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_SecurityNumber"
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_Load"
+            android:text="Yükle"
+            android:textColor="@color/yesil"
+            android:background="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+</ScrollView>

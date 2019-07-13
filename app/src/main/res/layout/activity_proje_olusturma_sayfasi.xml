@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProjeOlusturmaSayfasi"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proje Başlığı : "
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditText_ProjectHeader"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proje Açıklaması : "
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditText_ProjectDescription"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="En Yüksek Ücret : "
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditText_MaxPrice"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"
+        android:numeric="decimal"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_ReleaseProject"
+        android:text="Projeyı Yayınla"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/beyaz"
+        android:background="@color/mavi"/>
+
+</LinearLayout>

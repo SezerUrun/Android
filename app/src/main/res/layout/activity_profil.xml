@@ -1,139 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Profil"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
-
+    android:layout_height="match_parent">
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        tools:context=".Profil"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-            <TextView
+            android:orientation="horizontal">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextView_KullanıcıAdi"
-                android:text="Kullanıcı Adı : "
-                android:textColor="@color/beyaz"
-                android:layout_margin="10dp"/>
-            <TextView
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextView_KullanıcıAdi"
+                    android:text="Kullanıcı Adı : "
+                    android:textColor="@color/beyaz"
+                    android:layout_margin="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextView_MailAdresi"
+                    android:text="Mail Adresi : "
+                    android:textColor="@color/beyaz"
+                    android:layout_margin="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextView_Id"
+                    android:text="Id : "
+                    android:textColor="@color/beyaz"
+                    android:layout_margin="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextView_Bakiye"
+                    android:text="Bakiye : "
+                    android:textColor="@color/beyaz"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/TextView_MailAdresi"
-                android:text="Mail Adresi : "
-                android:textColor="@color/beyaz"
-                android:layout_margin="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/TextView_Projelerim"
-                android:text="Projelerim : "
-                android:textColor="@color/beyaz"
-                android:layout_margin="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/TextView_Bakiye"
-                android:text="Bakiye : "
-                android:textColor="@color/beyaz"
-                android:layout_margin="10dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/icon"
+                    android:background="@drawable/user"
                     android:id="@+id/ImageView_ProfilResmi"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eski Şifre:"
-            android:textColor="@color/beyaz"
-            android:layout_margin="10dp"/>
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EditText_EskiSifre"
-            android:password="true"
-            android:textColor="@color/beyaz"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Yeni Şifre:"
-            android:textColor="@color/beyaz"
-            android:layout_margin="10dp"/>
-        <EditText
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eski Şifre:"
+                android:textColor="@color/beyaz"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EditText_EskiSifre"
+                android:password="true"
+                android:textColor="@color/beyaz"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EditText_YeniSifre"
-            android:password="true"
-            android:textColor="@color/beyaz"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Yeni Şifre Tekrar:"
-            android:textColor="@color/beyaz"
-            android:layout_margin="10dp"/>
-        <EditText
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yeni Şifre:"
+                android:textColor="@color/beyaz"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EditText_YeniSifre"
+                android:password="true"
+                android:textColor="@color/beyaz"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/EditText_YeniSifreTekrar"
-            android:password="true"
-            android:textColor="@color/beyaz"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yeni Şifre Tekrar:"
+                android:textColor="@color/beyaz"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EditText_YeniSifreTekrar"
+                android:password="true"
+                android:textColor="@color/beyaz"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Şifre Değiştir"
+            android:id="@+id/Button_SifreDegistir"
+            android:background="@color/siyah"
+            android:textColor="@color/sari"
+            android:layout_margin="10dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_NewProject"
+            android:text="Yeni Proje Oluştur"
+            android:background="@color/siyah"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_GoToMessages"
+            android:text="Mesaj Gelen Kutusu"
+            android:background="@color/siyah"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_Projects"
+            android:text="Projelerim"
+            android:background="@color/siyah"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_LoadCredit"
+            android:text="Bakiye Yükle"
+            android:background="@color/siyah"
+            android:textColor="@color/beyaz"
+            android:layout_margin="10dp"/>
+
     </LinearLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Şifreyi Değiştir"
-        android:id="@+id/Button_SifreDegistir"
-        android:background="#000"
-        android:textColor="@color/mavi"
-        android:layout_margin="10dp"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Button_NewProject"
-        android:text="Yeni Proje Oluştur"
-        android:background="#000"
-        android:textColor="#fff"
-        android:layout_margin="10dp"/>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListView_Mesajlarim">
-    </ListView>
-
-</LinearLayout>
+</ScrollView>
