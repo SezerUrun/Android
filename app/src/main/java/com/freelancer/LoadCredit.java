@@ -22,8 +22,8 @@ public class LoadCredit extends AppCompatActivity {
     EditText editText_Amount, editText_CardNumber,editText_ExpirationDate,editText_SecurityNumber;
     Button button_Load;
     GetData getData;
-    String mailAdress, password, userName;
-    int userId, credit, artisMiktari;
+    static String mailAdress, password, userName;
+    static int userId, credit, artisMiktari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,27 @@ public class LoadCredit extends AppCompatActivity {
 
         Intent intent= getIntent();
         userId=intent.getIntExtra("userId",-1);
-        mailAdress = intent.getStringExtra("mailAdress");
-        password=intent.getStringExtra("password");
-        userName=intent.getStringExtra("userName");
-        credit=intent.getIntExtra("credit",0);
+        //KULLANICI BİLGİLERİNİN ALINMASI
+        Call<User> call = getData.getUser(userId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.body()!=null){
+                    mailAdress=response.body().getMail();
+                    userName=response.body().getName();
+                    password=response.body().getPassword();
+                    credit=response.body().getCredit();
+                }
+                else{
+                    Toast.makeText(LoadCredit.this,"Kullanıcı bilgileri alınırken bir hata oluştu\n"+response.message(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(LoadCredit.this,"Sunucu ile bağlantı kurulurken bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         button_Load.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +73,10 @@ public class LoadCredit extends AppCompatActivity {
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
+                        editText_Amount.setText("");
+                        editText_CardNumber.setText("");
+                        editText_ExpirationDate.setText("");
+                        editText_SecurityNumber.setText("");
                         Toast.makeText(LoadCredit.this,"Bakiye yüklemesi gerçekleştirildi\n"+response.message(),Toast.LENGTH_SHORT).show();
                     }
                     @Override

@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -59,7 +60,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/user"
-                    android:id="@+id/ImageView_ProfilResmi"/>
+                    android:id="@+id/ImageView_ProfilResmi"
+                    android:padding="10dp"
+                    android:layout_margin="10dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -79,7 +82,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/EditText_EskiSifre"
                 android:password="true"
-                android:textColor="@color/beyaz"/>
+                android:textColor="@color/beyaz"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:background="@color/gri"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,7 +103,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/EditText_YeniSifre"
                 android:password="true"
-                android:textColor="@color/beyaz"/>
+                android:textColor="@color/beyaz"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:background="@color/gri"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,14 +124,17 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/EditText_YeniSifreTekrar"
                 android:password="true"
-                android:textColor="@color/beyaz"/>
+                android:textColor="@color/beyaz"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:background="@color/gri"/>
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Şifre Değiştir"
             android:id="@+id/Button_SifreDegistir"
-            android:background="@color/siyah"
+            android:background="@color/mavi"
             android:textColor="@color/sari"
             android:layout_margin="10dp"/>
         <Button
@@ -130,7 +142,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_NewProject"
             android:text="Yeni Proje Oluştur"
-            android:background="@color/siyah"
+            android:background="@color/mavi"
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
 
@@ -139,7 +151,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_GoToMessages"
             android:text="Mesaj Gelen Kutusu"
-            android:background="@color/siyah"
+            android:background="@color/mavi"
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
 
@@ -148,7 +160,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_Projects"
             android:text="Projelerim"
-            android:background="@color/siyah"
+            android:background="@color/mavi"
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
 
@@ -157,7 +169,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_LoadCredit"
             android:text="Bakiye Yükle"
-            android:background="@color/siyah"
+            android:background="@color/mavi"
             android:textColor="@color/beyaz"
             android:layout_margin="10dp"/>
 

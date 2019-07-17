@@ -18,9 +18,10 @@ import retrofit2.Response;
 
 public class TeklifSayfasi extends AppCompatActivity {
 
-    TextView  textView_OfferOwnerId,textView_OfferPrice,textView_OfferDesciption;
-    Button Button_AcceptTheOffer;
+    TextView  TextView_OfferOwnerName,textView_OfferPrice,textView_OfferDesciption;
+    Button Button_AcceptTheOffer,Button_MessageToOfferOwner;
     GetData getData;
+    String offerOwnerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,11 @@ public class TeklifSayfasi extends AppCompatActivity {
         setContentView(R.layout.activity_teklif_sayfasi);
 
         getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
-        textView_OfferOwnerId=findViewById(R.id.TextView_OfferOwnerId);
+        TextView_OfferOwnerName=findViewById(R.id.TextView_OfferOwnerName);
         textView_OfferPrice=findViewById(R.id.TextView_OfferPrice);
         textView_OfferDesciption=findViewById(R.id.TextView_OfferDescription);
         Button_AcceptTheOffer=findViewById(R.id.Button_AcceptTheOffer);
+        Button_MessageToOfferOwner=findViewById(R.id.Button_MessageToOfferOwner);
 
         Intent intent=getIntent();
         String userName=intent.getStringExtra("userName");
@@ -50,7 +52,20 @@ public class TeklifSayfasi extends AppCompatActivity {
         final String deadLine=intent.getStringExtra("deadLine");
         int workerId=intent.getIntExtra("workerId",-1);
 
-        textView_OfferOwnerId.setText(textView_OfferOwnerId.getText()+Integer.toString(offerOwnerId));
+        Call<User> call = getData.getUser(offerOwnerId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                offerOwnerName=response.body().getName();
+                TextView_OfferOwnerName.setText(TextView_OfferOwnerName.getText()+offerOwnerName);
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable throwable) {
+                Toast.makeText(TeklifSayfasi.this,"Sunucudan bilgi alınıken bir hata oluştu",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         textView_OfferPrice.setText(textView_OfferPrice.getText()+Integer.toString(offerPrice));
         textView_OfferDesciption.setText(textView_OfferDesciption.getText()+offerDescription);
         if (workerId==-1){
@@ -72,23 +87,16 @@ public class TeklifSayfasi extends AppCompatActivity {
                         call.cancel();
                     }
                 });
-                /*
-                Proje proje = new Proje(header,description,projectId,projectOwnerId,maxPrice);
-                proje.setWorkerId(offerOwnerId);
-                proje.setReleaseTime(releaseTime);
-                proje.setDeadline(deadLine);
-                Call<Proje> call = getData.UpdateProject(proje);
-                call.enqueue(new Callback<Proje>() {
-                    @Override
-                    public void onResponse(Call<Proje> call, Response<Proje> response) {
-                        Toast.makeText(TeklifSayfasi.this,"Teklif kabul edildi\n"+response.message(),Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onFailure(Call<Proje> call, Throwable t) {
-                        Toast.makeText(TeklifSayfasi.this,"Bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
-                        call.cancel();
-                    }
-                });*/
+            }
+        });
+        Button_MessageToOfferOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(TeklifSayfasi.this,MesajlasmaSayfasi.class);
+                i.putExtra("senderId",userId);
+                i.putExtra("receiverId",offerOwnerId);
+                i.putExtra("yanitMi","degil");
+                startActivity(i);
             }
         });
 

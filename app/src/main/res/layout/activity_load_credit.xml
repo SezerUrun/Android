@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Cost : "
+            android:text="Miktar : "
             android:textColor="@color/beyaz"
             android:padding="10dp"
             android:layout_margin="1dp"/>
@@ -28,7 +28,8 @@
             android:padding="10dp"
             android:layout_margin="10dp"
             android:textColor="@color/beyaz"
-            android:numeric="decimal"/>
+            android:numeric="decimal"
+            android:background="@color/gri"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +45,8 @@
             android:padding="10dp"
             android:layout_margin="10dp"
             android:textColor="@color/beyaz"
-            android:numeric="decimal"/>
+            android:numeric="decimal"
+            android:background="@color/gri"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +61,8 @@
             android:id="@+id/editText_ExpirationDate"
             android:textColor="@color/beyaz"
             android:padding="10dp"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@color/gri"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,7 +78,8 @@
             android:id="@+id/editText_SecurityNumber"
             android:textColor="@color/beyaz"
             android:padding="10dp"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@color/gri"/>
 
         <Button
             android:layout_width="match_parent"

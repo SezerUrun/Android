@@ -3,8 +3,10 @@ package com.freelancer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,34 +25,41 @@ public class MesajlasmaSayfasi extends AppCompatActivity {
     EditText editText_Mesaj;
     Button button_Gonder;
     GetData getData;
-    String mailAdress,userName,password,senderName,receiverName;
-    int userId;
+    static String mailAdress,userName,password,senderName,receiverName, content;
+    static int userId, credit,senderId,receiverId;
     Intent intent;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesajlasma_sayfasi);
 
-        intent=getIntent();
-        mailAdress=intent.getStringExtra("mailAdress");
-        userName=intent.getStringExtra("userName");
-        userId=intent.getIntExtra("userId",-1);
-        password=intent.getStringExtra("password");
-
         getData = RetrofitClient.getRetrofitInstance().create(GetData.class);
+        layout=findViewById(R.id.linearLayout);
         textView_Gonderici=findViewById(R.id.TextView_Gonderici);
         textView_Alici=findViewById(R.id.TextView_Alici);
         textView_Mesaj=findViewById(R.id.TextView_MesajIcerigi);
         editText_Mesaj=findViewById(R.id.EditText_Mesaj);
         button_Gonder=findViewById(R.id.Button_MesajGonder);
 
-        intent =  getIntent();
-        final int senderId=intent.getIntExtra("senderId",-1);
-        final int receiverId=intent.getIntExtra("receiverId",-1);
-        String content="";
+        //EDITTEXT'E OTOMATIK ODAKLANMAYI KAPATMA
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        //KULLANICI BİLGİLERİNİN ALINMASI
+        intent=getIntent();
+        senderId=intent.getIntExtra("senderId",-1);
+        receiverId=intent.getIntExtra("receiverId",-1);
+        content="";
         try{
             content= intent.getStringExtra("content");
+            if (intent.getStringExtra("yanitMi").equals("yanit")){
+                layout.removeView(textView_Alici);
+            }
+            else{
+                layout.removeView(textView_Gonderici);
+                layout.removeView(textView_Mesaj);
+            }
         }
         catch(Exception e){
         }
@@ -59,8 +68,17 @@ public class MesajlasmaSayfasi extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(MesajlasmaSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
                 senderName=response.body().getName();
+                if (intent.getStringExtra("yanitMi").equals("yanit")){
+                    textView_Gonderici.setText("Gönderen : "+receiverName);
+                    textView_Mesaj.setVisibility(View.VISIBLE);
+                    textView_Mesaj.setText("Mesaj İçeriği : " +content);
+                }
+                else{
+                    textView_Alici.setText("Alıcı : "+receiverName);
+                    textView_Mesaj.setText("");
+                }
+                //Toast.makeText(MesajlasmaSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<User> call, Throwable throwable) {
@@ -71,24 +89,23 @@ public class MesajlasmaSayfasi extends AppCompatActivity {
         call2.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call2, Response<User> response) {
-                Toast.makeText(MesajlasmaSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
                 receiverName=response.body().getName();
+                if (intent.getStringExtra("yanitMi").equals("yanit")){
+                    textView_Gonderici.setText("Gönderen : "+receiverName);
+                    textView_Mesaj.setVisibility(View.VISIBLE);
+                    textView_Mesaj.setText("Mesaj İçeriği : " +content);
+                }
+                else{
+                    textView_Alici.setText("Alıcı : "+receiverName);
+                    textView_Mesaj.setText("");
+                }
+                //Toast.makeText(MesajlasmaSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<User> call2, Throwable throwable) {
 
             }
         });
-
-        intent=getIntent();
-        if (intent.getStringExtra("yanitMi").equals("yanit")){
-            textView_Gonderici.setText("Gönderen : "+senderName);
-            textView_Mesaj.setText("Mesaj İçeriği : " +content);
-        }
-        else{
-            textView_Alici.setText("Alıcı : "+receiverName);
-            textView_Mesaj.setText("");
-        }
 
 
         button_Gonder.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +117,7 @@ public class MesajlasmaSayfasi extends AppCompatActivity {
                     call.enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
+                            editText_Mesaj.setText("");
                             Toast.makeText(MesajlasmaSayfasi.this, "Mesajınız başarıyla gönderildi\n"+response.message(), Toast.LENGTH_SHORT).show();
                         }
                         @Override

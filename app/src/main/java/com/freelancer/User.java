@@ -6,14 +6,14 @@ public class User {
 
     @SerializedName("Id")
     private int id;
-    @SerializedName("Credit")
-    private int credit;
     @SerializedName("Name")
     private String name;
     @SerializedName("Mail")
     private String mail;
     @SerializedName("Password")
     private String password;
+    @SerializedName("Credit")
+    private int credit;
 
     public User(int id, String name, String mail, String password, int credit) {
         this.id=id;

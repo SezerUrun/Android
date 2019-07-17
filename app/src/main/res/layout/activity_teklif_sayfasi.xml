@@ -11,8 +11,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TextView_OfferOwnerId"
-        android:text="Teklif Sahibi Id : "
+        android:id="@+id/TextView_OfferOwnerName"
+        android:text="Teklif Sahibi : "
         android:textColor="@color/beyaz"
         android:padding="10dp"
         android:layout_margin="10dp"/>
@@ -40,8 +40,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/Button_AcceptTheOffer"
         android:text="Teklifi Kabul Et"
-        android:background="@color/yesil"
+        android:background="@color/mavi"
+        android:textColor="@color/yesil"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Button_MessageToOfferOwner"
+        android:text="Teklifi Sahibine Mesaj Gönder"
+        android:background="@color/mavi"
         android:textColor="@color/beyaz"
         android:padding="10dp"
         android:layout_margin="10dp"/>
+
 </LinearLayout>

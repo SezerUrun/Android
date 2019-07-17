@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class Messages extends AppCompatActivity {
     ListView listView_Mesajlarim;
     GetData getData;
-    int userId;
+    static int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

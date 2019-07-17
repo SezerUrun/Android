@@ -71,9 +71,7 @@
        <ListView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:id="@+id/ListView_Teklifler"
-           android:layout_alignParentLeft="true"
-           android:layout_alignParentTop="true"/>
+           android:id="@+id/ListView_Teklifler"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -89,9 +87,10 @@
             android:id="@+id/EditText_TeklifMiktari"
             android:hint="Teklif Miktarını Girin"
             android:textColor="@color/beyaz"
-            android:textColorHint="#888"
+            android:textColorHint="@color/beyaz"
             android:padding="10dp"
             android:layout_margin="10dp"
+            android:background="@color/gri"
             android:numeric="decimal"/>
         <EditText
             android:layout_width="match_parent"
@@ -99,14 +98,15 @@
             android:id="@+id/EditText_Aciklama"
             android:hint="Açıklama"
             android:textColor="@color/beyaz"
-            android:textColorHint="#888"
+            android:textColorHint="@color/beyaz"
             android:padding="10dp"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@color/gri"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Teklif Ver"
-            android:background="@color/siyah"
+            android:background="@color/mavi"
             android:textColor="@color/beyaz"
             android:id="@+id/Button_TeklifVer"
             android:padding="10dp"
@@ -118,8 +118,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_ProjeSahibinineMesajGonder"
             android:text="Proje Sahibine Mesaj Gönder"
-            android:background="@color/siyah"
-            android:textColor="@color/mavi"
+            android:background="@color/mavi"
+            android:textColor="@color/beyaz"
             android:padding="10dp"
             android:layout_margin="10dp"/>
         <Button
@@ -128,7 +128,7 @@
             android:id="@+id/Button_ProjeTamamlandi"
             android:text="Proje Tamamlandı"
             android:background="@color/mavi"
-            android:textColor="@color/beyaz"
+            android:textColor="@color/yesil"
             android:padding="10dp"
             android:layout_margin="10dp"
             android:visibility="invisible"/>

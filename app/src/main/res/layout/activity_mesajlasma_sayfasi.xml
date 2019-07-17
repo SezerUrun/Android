@@ -1,55 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MesajlasmaSayfasi"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorPrimary">
 
-    <TextView
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_Alici"
-        android:text=""
-        android:textColor="@color/beyaz"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_Gonderici"
-        android:text=""
-        android:textColor="@color/beyaz"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextView_MesajIcerigi"
-        android:text="Mesaj İçeriği : "
-        android:textColor="@color/beyaz"
-        android:padding="10dp"
-        android:layout_margin="10dp" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/EditText_Mesaj"
-        android:hint="Mesajınızı buraya yazınız"
-        android:textColorHint="#888"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textColor="@color/beyaz"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Button_MesajGonder"
-        android:text="Gönder"
-        android:background="@color/beyaz"
-        android:textColor="@color/mavi"
-        android:padding="10dp"
-        android:layout_margin="10dp"/>
+        android:layout_height="match_parent"
+        tools:context=".MesajlasmaSayfasi"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_Alici"
+            android:text=""
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_Gonderici"
+            android:text=""
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextView_MesajIcerigi"
+            android:text="Mesaj İçeriği : "
+            android:textColor="@color/beyaz"
+            android:padding="10dp"
+            android:layout_margin="10dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EditText_Mesaj"
+            android:hint="Mesajınızı buraya yazınız"
+            android:textColorHint="#888"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/beyaz"
+            android:background="@color/gri"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Button_MesajGonder"
+            android:text="Gönder"
+            android:background="@color/beyaz"
+            android:textColor="@color/mavi"
+            android:padding="10dp"
+            android:layout_margin="10dp"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

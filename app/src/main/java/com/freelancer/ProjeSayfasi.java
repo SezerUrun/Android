@@ -29,8 +29,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListener{
-    int projectId,userId,projectOwnerId,workerId,maxPrice, position, odemeMiktari, receiverId,offerOwnerId;
-    String header,description,state,mailAdress,userName,password,releaseTime,deadLine;
+    static int projectId,userId,projectOwnerId,workerId,maxPrice, position, odemeMiktari, receiverId,offerOwnerId;
+    static String header,description,state,mailAdress,userName,password,releaseTime,deadLine;
     TextView tv_projeId,projeBasligi,projeAciklamasi,maxUcret,TextView_ProjectOwner, TextView_Teklifler,TextView_ReleaseTime,TextView_DeadLine;
     EditText editText_TeklifMiktari,editText_Aciklama;
     Button Button_TeklifVer, Button_DeleteProject, Button_ProjeSahibinineMesajGonder,Button_ProjeTamamlandi;
@@ -67,6 +67,9 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
         Button_ProjeTamamlandi.setOnClickListener(this);
         Button_DeleteProject.setOnClickListener(this);
 
+        //EDITTEXT'E OTOMATIK ODAKLANMAYI KAPATMA
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         intent = getIntent();
         projectId=intent.getIntExtra("projectId",-1);
         header=intent.getStringExtra("header");
@@ -74,14 +77,31 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
         state=intent.getStringExtra("state");
         maxPrice=intent.getIntExtra("maxPrice",0);
         userId=intent.getIntExtra("userId",-1);
-        userName=intent.getStringExtra("userName");
-        password=intent.getStringExtra("password");
-        mailAdress=intent.getStringExtra("mailAdress");
         projectOwnerId=intent.getIntExtra("ownerId",-1);
         workerId=intent.getIntExtra("workerId",-1);
         releaseTime=intent.getStringExtra("releaseTime");
         deadLine=intent.getStringExtra("deadLine");
         offerOwnerId=intent.getIntExtra("offerOwnerId",offerOwnerId);
+
+        Call<User> call = getData.getUser(userId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.body()!=null){
+                    mailAdress=response.body().getMail();
+                    userName=response.body().getName();
+                    password=response.body().getPassword();
+                }
+                else{
+                    Toast.makeText(ProjeSayfasi.this,"Kullanıcı bilgileri alınırken bir hata oluştu\n"+response.message(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(ProjeSayfasi.this,"Sunucu ile bağlantı kurulurken bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         tv_projeId.setText(tv_projeId.getText()+Integer.toString(projectId));
         projeBasligi.setText(projeBasligi.getText()+header);
@@ -89,35 +109,40 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
         maxUcret.setText(maxUcret.getText()+Integer.toString(maxPrice));
         TextView_ReleaseTime.setText(TextView_ReleaseTime.getText()+releaseTime);
         TextView_DeadLine.setText(TextView_DeadLine.getText()+deadLine);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         //PROJE SAHİPLERİ KENDİ PROJELERİNE TEKLİF VEREMEZ
         if(userId==projectOwnerId || userId==workerId){
-            editText_Aciklama.setVisibility(View.INVISIBLE);
-            editText_TeklifMiktari.setVisibility(View.INVISIBLE);
-            Button_TeklifVer.setVisibility(View.INVISIBLE);
-            Button_ProjeSahibinineMesajGonder.setVisibility(View.INVISIBLE);
-            Button_ProjeTamamlandi.setVisibility(View.VISIBLE);
             layout.removeView(editText_Aciklama);
             layout.removeView(editText_TeklifMiktari);
             layout.removeView(Button_TeklifVer);
             layout.removeView(Button_ProjeSahibinineMesajGonder);
             if (userId==projectOwnerId){
                 TextView_ProjectOwner.setText("Proje sahipleri kendi projelerine teklif veremez.");
+                Button_ProjeTamamlandi.setVisibility(View.VISIBLE);
+                if(workerId==-1){
+                    layout.removeView(Button_ProjeTamamlandi);
+                }
                 Button_DeleteProject.setVisibility(View.VISIBLE);
             }
             else if(userId==workerId){
                 TextView_ProjectOwner.setText("Bu proje için çalışıyorsunuz");
+                layout.removeView(Button_DeleteProject);
             }
+        }
+        else{
+            layout.removeView(TextView_ProjectOwner);
+            layout.removeView(Button_ProjeTamamlandi);
+            layout.removeView(Button_DeleteProject);
         }
 
         //TEKLİF SAYFASINA GİTME
         if (workerId==-1){
             try{
-                Call<List<Offer>> call=getData.getOffers(projectId);
-                call.enqueue(new Callback<List<Offer>>() {
+                Call<List<Offer>> call2=getData.getOffers(projectId);
+                call2.enqueue(new Callback<List<Offer>>() {
                     @Override
-                    public void onResponse(Call<List<Offer>> call, Response<List<Offer>> response) {
+                    public void onResponse(Call<List<Offer>> call2, Response<List<Offer>> response) {
                         teklifList=response.body();
                         if (teklifList.size()>0){
                             if (userId==projectOwnerId){
@@ -144,6 +169,7 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
                                         intent.putExtra("releaseTime",releaseTime);
                                         intent.putExtra("deadLine",deadLine);
                                         intent.putExtra("workerId",workerId);
+                                        intent.putExtra("userId",userId);
                                         startActivity(intent);
                                     }
                                 });
@@ -163,7 +189,7 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                     @Override
-                    public void onFailure(Call<List<Offer>> call, Throwable t) {
+                    public void onFailure(Call<List<Offer>> call2, Throwable t) {
                         Toast.makeText(ProjeSayfasi.this,"Veriler sunucudan alınamadı",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -217,17 +243,19 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
                 int teklifMiktari=Integer.parseInt(editText_TeklifMiktari.getText().toString());
                 String aciklama=editText_Aciklama.getText().toString();
                 Offer offer =new Offer(projectId,userId,teklifMiktari,aciklama);
-                Toast.makeText(ProjeSayfasi.this, "projeId: "+projectId+"\nuserId: "+userId+"\nteklifMiktari: "+teklifMiktari+"\naciklama: "+aciklama, Toast.LENGTH_LONG).show();
+                //Toast.makeText(ProjeSayfasi.this, "projeId: "+projectId+"\nuserId: "+userId+"\nteklifMiktari: "+teklifMiktari+"\naciklama: "+aciklama, Toast.LENGTH_LONG).show();
                 try{
                     Call<Offer> call=getData.NewOffer(offer);
                     call.enqueue(new Callback<Offer>() {
                         @Override
                         public void onResponse(Call<Offer> call, Response<Offer> response) {
                             if (response.message().equals("Created")){
-                                Toast.makeText(ProjeSayfasi.this, "Teklifiniz oluşturuldu\n"+response.message(), Toast.LENGTH_SHORT).show();
+                                editText_TeklifMiktari.setText("");
+                                editText_Aciklama.setText("");
+                                Toast.makeText(ProjeSayfasi.this, "Teklifiniz oluşturuldu", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Toast.makeText(ProjeSayfasi.this, "Teklif verilirken bir hata oluştu\n"+response.message(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProjeSayfasi.this, "Teklif verilirken bir hata oluştu", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -258,8 +286,8 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
                 call.enqueue(new Callback<Proje>() {
                     @Override
                     public void onResponse(Call<Proje> call, Response<Proje> response) {
+                        //Toast.makeText(Profil.this,"Proje tamamlandı ve bakiye aktarıldı",Toast.LENGTH_SHORT).show();
                         Toast.makeText(ProjeSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(Profil.this,"Teklif kabul edildi",Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onFailure(Call<Proje> call, Throwable t) {
@@ -336,16 +364,15 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
 
         }
         else if (viewId==Button_DeleteProject.getId()){
-            Call<Proje> call = getData.DeleteProject(projectId);
-            call.enqueue(new Callback<Proje>() {
+            Call<String> call = getData.DeleteProject(projectId);
+            call.enqueue(new Callback<String>() {
                 @Override
-                public void onResponse(Call<Proje> call, Response<Proje> response) {
-                    Toast.makeText(ProjeSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(Profil.this,"Proje Silindi",Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Toast.makeText(ProjeSayfasi.this,"Proje Silindi\n"+response.message(),Toast.LENGTH_SHORT).show();
                 }
                 @Override
-                public void onFailure(Call<Proje> call, Throwable t) {
-                    Toast.makeText(ProjeSayfasi.this,"Bir hata oluştu",Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(ProjeSayfasi.this,"Bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
                     call.cancel();
                 }
             });

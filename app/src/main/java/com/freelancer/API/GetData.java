@@ -68,5 +68,5 @@ public interface GetData {
     Call<Proje> SetCompletedOwner(@Query("projectid") int projectId);
 
     @DELETE("/api/projects/")
-    Call<Proje> DeleteProject(@Query("projectid") int projectId);
+    Call<String> DeleteProject(@Query("id") int projectId);
 }

@@ -22,8 +22,8 @@ public class UyeSayfasi extends AppCompatActivity {
     EditText editText_Mesaj;
     Button button_MesajGonder;
     GetData getData;
-    int userId, ownerId;
-    String userName;
+    static int userId, ownerId;
+    static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

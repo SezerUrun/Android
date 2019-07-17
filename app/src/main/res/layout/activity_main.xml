@@ -7,7 +7,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#222">
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -25,7 +25,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/EditText_Email"
         android:textColor="#fff"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/gri"
+        android:padding="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -39,7 +41,9 @@
         android:id="@+id/EditText_Sifre"
         android:textColor="#fff"
         android:layout_margin="10dp"
-        android:password="true"/>
+        android:password="true"
+        android:background="@color/gri"
+        android:padding="10dp"/>
 
     <Button
         android:layout_width="match_parent"

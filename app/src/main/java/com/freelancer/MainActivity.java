@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView EditText_Email,EditText_Sifre;
     Button Button_Giris,Button_Kaydol;
-    String mailAdresi,password;
+    static String mailAdresi,password;
     GetData getData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if (mailAdresi.equals(response.body().getMail()) && password.equals(response.body().getPassword())){
                                 Toast.makeText(MainActivity.this,"Giriş Başarılı",Toast.LENGTH_SHORT).show();
                                 Intent intent= new Intent(MainActivity.this,Anasayfa.class);
-                                intent.putExtra("mailAdress",response.body().getMail());
                                 intent.putExtra("userId",response.body().getId());
-                                intent.putExtra("userName",response.body().getName());
-                                intent.putExtra("password",response.body().getPassword());
-                                intent.putExtra("credit",response.body().getCredit());
+                                //intent.putExtra("mailAdress",response.body().getMail());
+                                //intent.putExtra("userName",response.body().getName());
+                                //intent.putExtra("password",response.body().getPassword());
+                                //intent.putExtra("credit",response.body().getCredit());
                                 startActivity(intent);
                             }
                             else{
@@ -101,8 +101,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     call.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
-                            //Toast.makeText(MainActivity.this,response.code(),Toast.LENGTH_SHORT).show();
+                            EditText_Email.setText("");
+                            EditText_Sifre.setText("");
                             Toast.makeText(MainActivity.this,"Yeni kullanıcı oluşturuldu\nŞimdi giriş yapabilirsiniz",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this,response.code(),Toast.LENGTH_SHORT).show();
                         }
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {

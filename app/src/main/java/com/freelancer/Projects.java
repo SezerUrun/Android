@@ -28,8 +28,8 @@ public class Projects extends AppCompatActivity {
     EditText editText_Mesaj;
     Button button_Gonder;
     GetData getData;
-    String mailAdress,userName,password,senderName,receiverName;
-    int userId;
+    static String mailAdress,userName,password,senderName,receiverName;
+    static int userId;
     ListView ListView_YayinladigimProjeler, ListView_CalistigimProjeler;
     Intent intent;
 

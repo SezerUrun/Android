@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Messages"
+    android:orientation="vertical"
     android:background="@color/colorPrimary">
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".Messages"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/TextView_GelenMesajlar"
-            android:text="Gelen Mesajlar"
-            android:textColor="@color/beyaz"
-            android:padding="10dp"
-            android:layout_margin="10dp"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/TextView_GelenMesajlar"
+        android:text="Gelen Mesajlar"
+        android:textColor="@color/beyaz"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="16dp"/>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ListView_Mesajlarim"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true">
-        </ListView>
-    </LinearLayout>
-</ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ListView_Mesajlarim"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+    </ListView>
+</LinearLayout>

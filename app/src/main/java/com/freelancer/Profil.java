@@ -30,8 +30,8 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
     TextView textView_KullaniciAdi,textView_mailAdresi,textView_Id,textView_Bakiye;
     EditText editText_eskiSifre, editText_yeniSifre, editText_yeniSifreTekrar;
     ImageView imageView_ProfilResmi;
-    String mailAdress,projelerim,userName,password;
-    int userId,credit;
+    static String mailAdress,userName,password;
+    static int userId,credit;
     Intent item,intent;
     ListView listView_Mesajlarim;
 
@@ -57,17 +57,35 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         Button_Projects=findViewById(R.id.Button_Projects);
 
         intent= getIntent();
-        mailAdress = intent.getStringExtra("mailAdress");
-        password=intent.getStringExtra("password");
         userId=intent.getIntExtra("userId",-1);
-        userName=intent.getStringExtra("userName");
-        projelerim=intent.getStringExtra("projelerim");
-        credit=intent.getIntExtra("credit",0);
+        //KULLANICI BİLGİLERİNİN ALINMASI
+        Call<User> call = getData.getUser(userId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.body()!=null){
+                    mailAdress=response.body().getMail();
+                    userName=response.body().getName();
+                    password=response.body().getPassword();
+                    credit=response.body().getCredit();
 
-        textView_KullaniciAdi.setText(textView_KullaniciAdi.getText()+userName);
-        textView_Id.setText(textView_Id.getText().toString()+userId);
-        textView_mailAdresi.setText(textView_mailAdresi.getText()+mailAdress);
-        textView_Bakiye.setText(textView_Bakiye.getText()+Integer.toString(credit));
+                    textView_KullaniciAdi.setText(textView_KullaniciAdi.getText()+userName);
+                    textView_mailAdresi.setText(textView_mailAdresi.getText()+mailAdress);
+                    textView_Id.setText(textView_Id.getText().toString()+userId);
+                    textView_Bakiye.setText(textView_Bakiye.getText()+Integer.toString(credit));
+                    //Toast.makeText(Profil.this,mailAdress+"\n"+userName+"\n"+password+"\n"+credit,Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(Profil.this,"Kullanıcı bilgileri alınırken bir hata oluştu\n"+response.message(),Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(Profil.this,"Sunucu ile bağlantı kurulurken bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         button_sifreDegistir.setOnClickListener(this);
         button_newProject.setOnClickListener(this);
@@ -77,9 +95,6 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         imageView_ProfilResmi.setOnClickListener(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        //GELEN MESAJLARIN LİSTELENMESİ
-
 
     }
 
@@ -104,6 +119,9 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
                         call.enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {
+                                editText_eskiSifre.setText("");
+                                editText_yeniSifre.setText("");
+                                editText_yeniSifreTekrar.setText("");
                                 Toast.makeText(Profil.this,"Şifre başarıyla değiştirildi\n"+response.message(),Toast.LENGTH_SHORT).show();
                             }
                             @Override
@@ -128,9 +146,6 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         else if (viewId==button_newProject.getId()){
             intent = new Intent(Profil.this,ProjeOlusturmaSayfasi.class);
             intent.putExtra("userId",userId);
-            intent.putExtra("userName",userName);
-            intent.putExtra("mailAdress",mailAdress);
-            intent.putExtra("password",password);
             startActivity(intent);
         }
         else if(viewId==Button_Messages.getId()){
@@ -146,10 +161,6 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
         else if(viewId==Button_LoadCredit.getId()){
             intent=new Intent(Profil.this,LoadCredit.class);
             intent.putExtra("userId",userId);
-            intent.putExtra("userName",userName);
-            intent.putExtra("mailAdress",mailAdress);
-            intent.putExtra("password",password);
-            intent.putExtra("credit",credit);
             startActivity(intent);
         }
         else if(viewId==imageView_ProfilResmi.getId()){
