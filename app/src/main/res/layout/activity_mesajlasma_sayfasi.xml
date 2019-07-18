@@ -43,10 +43,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/EditText_Mesaj"
             android:hint="Mesajınızı buraya yazınız"
-            android:textColorHint="#888"
             android:padding="10dp"
             android:layout_margin="10dp"
             android:textColor="@color/beyaz"
+            android:textColorHint="@color/beyaz"
             android:background="@color/gri"/>
         <Button
             android:layout_width="match_parent"

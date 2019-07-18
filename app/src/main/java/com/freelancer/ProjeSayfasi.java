@@ -117,9 +117,9 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
             layout.removeView(editText_TeklifMiktari);
             layout.removeView(Button_TeklifVer);
             layout.removeView(Button_ProjeSahibinineMesajGonder);
+            Button_ProjeTamamlandi.setVisibility(View.VISIBLE);
             if (userId==projectOwnerId){
                 TextView_ProjectOwner.setText("Proje sahipleri kendi projelerine teklif veremez.");
-                Button_ProjeTamamlandi.setVisibility(View.VISIBLE);
                 if(workerId==-1){
                     layout.removeView(Button_ProjeTamamlandi);
                 }
@@ -286,45 +286,27 @@ public class ProjeSayfasi extends AppCompatActivity implements View.OnClickListe
                 call.enqueue(new Callback<Proje>() {
                     @Override
                     public void onResponse(Call<Proje> call, Response<Proje> response) {
-                        //Toast.makeText(Profil.this,"Proje tamamlandı ve bakiye aktarıldı",Toast.LENGTH_SHORT).show();
-                        Toast.makeText(ProjeSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProjeSayfasi.this,"Proje tamamlandı ve bakiye aktarıldı\n"+response.message(),Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onFailure(Call<Proje> call, Throwable t) {
-                        Toast.makeText(ProjeSayfasi.this,"Bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProjeSayfasi.this,"Proje tamamlandı ve bakiye aktarıldı\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ProjeSayfasi.this,"Bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
                         call.cancel();
                     }
                 });
-                /*
-                Proje proje = new Proje(header,description,projectId,projectOwnerId,maxPrice);
-                proje.setWorkerId(workerId);
-                proje.setReleaseTime(releaseTime);
-                proje.setDeadline(deadLine);
-                proje.setCompletedOwner(true);
-                Call<Proje> call = getData.UpdateProject(proje);
-                call.enqueue(new Callback<Proje>() {
-                    @Override
-                    public void onResponse(Call<Proje> call, Response<Proje> response) {
-                        Toast.makeText(ProjeSayfasi.this,"Teklif kabul edildi\n"+response.message(),Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onFailure(Call<Proje> call, Throwable t) {
-                        Toast.makeText(ProjeSayfasi.this,"Bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
-                        call.cancel();
-                    }
-                });*/
             }
             else if(userId==workerId){
                 Call<Proje> call = getData.SetCompletedWorker(projectId);
                 call.enqueue(new Callback<Proje>() {
                     @Override
                     public void onResponse(Call<Proje> call, Response<Proje> response) {
-                        Toast.makeText(ProjeSayfasi.this,response.message(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProjeSayfasi.this,"Proje tamamlandı\n"+response.message(),Toast.LENGTH_SHORT).show();
                         //Toast.makeText(Profil.this,"Teklif kabul edildi",Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onFailure(Call<Proje> call, Throwable t) {
-                        Toast.makeText(ProjeSayfasi.this,"Bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProjeSayfasi.this,"Proje tamamlandı\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
                         call.cancel();
                     }
                 });
