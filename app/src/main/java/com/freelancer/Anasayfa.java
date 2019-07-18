@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.freelancer.API.GetData;
 import com.freelancer.API.RetrofitClient;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -75,6 +76,7 @@ public class Anasayfa extends AppCompatActivity{
                 @Override
                 public void onResponse(Call<List<Proje>> call2, Response<List<Proje>> response) {
                     list=response.body();
+                    list=reverseList(list);
                     if(list!=null){
                         final String[] projeler =new String[list.size()];
                         for (int i=0;i<list.size();i++){
@@ -91,7 +93,7 @@ public class Anasayfa extends AppCompatActivity{
                                 intent.putExtra("header",list.get(position).getHeader());
                                 intent.putExtra("description",list.get(position).getDescription());
                                 intent.putExtra("projectId",list.get(position).getId());
-                                intent.putExtra("price",list.get(position).getMaxPrice());
+                                intent.putExtra("maxPrice",list.get(position).getMaxPrice());
                                 intent.putExtra("ownerId",list.get(position).getOwnerId());
                                 intent.putExtra("releaseTime",list.get(position).getReleaseTime());
                                 intent.putExtra("deadLine",list.get(position).getDeadline());
@@ -133,9 +135,61 @@ public class Anasayfa extends AppCompatActivity{
                 intent.putExtra("credit",credit);
                 startActivity(intent);
                 return true;
+            case R.id.action_refresh:
+                try{
+                    Call<List<Proje>> call2 = getData.getProjects();
+                    call2.enqueue(new Callback<List<Proje>>() {
+                        @Override
+                        public void onResponse(Call<List<Proje>> call2, Response<List<Proje>> response) {
+                            list=response.body();
+                            list=reverseList(list);
+                            if(list!=null){
+                                final String[] projeler =new String[list.size()];
+                                for (int i=0;i<list.size();i++){
+                                    projeler[i]=list.get(i).getHeader();
+                                }
+                                ListView listView= findViewById(R.id.listView);
+                                ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<>(Anasayfa.this, R.layout.satir_layout, R.id.textView, projeler);
+                                listView.setAdapter(veriAdaptoru);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Intent intent =new Intent(Anasayfa.this,ProjeSayfasi.class);
+                                        intent.putExtra("userId",userId);
+                                        intent.putExtra("header",list.get(position).getHeader());
+                                        intent.putExtra("description",list.get(position).getDescription());
+                                        intent.putExtra("projectId",list.get(position).getId());
+                                        intent.putExtra("maxPrice",list.get(position).getMaxPrice());
+                                        intent.putExtra("ownerId",list.get(position).getOwnerId());
+                                        intent.putExtra("releaseTime",list.get(position).getReleaseTime());
+                                        intent.putExtra("deadLine",list.get(position).getDeadline());
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+
+                        }
+                        @Override
+                        public void onFailure(Call<List<Proje>> call2, Throwable throwable) {
+                            Toast.makeText(Anasayfa.this, "Projeler yüklenirken bir hata oluştu", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                catch(Exception e){
+                    Toast.makeText(this, "Bir hata oluştu.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    List<Proje> reverseList(List<Proje> list){
+        LinkedList<Proje> newList=new LinkedList<>();
+        for(int i=list.size()-1;i>=0;i--){
+            newList.add(list.get(i));
+        }
+        return newList;
     }
 
 }

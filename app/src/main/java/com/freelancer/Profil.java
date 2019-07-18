@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -96,6 +98,41 @@ public class Profil extends AppCompatActivity implements View.OnClickListener{
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Call<User> call = getData.getUser(userId);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.body()!=null){
+                            mailAdress=response.body().getMail();
+                            userName=response.body().getName();
+                            password=response.body().getPassword();
+                            credit=response.body().getCredit();
+
+                            textView_KullaniciAdi.setText("Kullanıcı Adı : "+userName);
+                            textView_mailAdresi.setText("Mail Adresi : "+mailAdress);
+                            textView_Id.setText("Id : "+userId);
+                            textView_Bakiye.setText("Bakiye : "+Integer.toString(credit));
+                            //Toast.makeText(Profil.this,mailAdress+"\n"+userName+"\n"+password+"\n"+credit,Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(Profil.this,"Kullanıcı bilgileri alınırken bir hata oluştu\n"+response.message(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(Profil.this,"Sunucu ile bağlantı kurulurken bir hata oluştu\n"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //SAG USTTEKI ACILIR MENUYE TIKLAMA OLAYLARI
